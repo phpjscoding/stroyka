@@ -1,0 +1,4 @@
+{% for product in collection.products %}
+    {{ product.title | link_to:product.url }}
+    
+{% endfor %}

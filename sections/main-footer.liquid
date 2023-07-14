@@ -1,0 +1,69 @@
+<footer>
+    <div class="container px-4 mt-8">
+      <p class="text-[#849BA6] py-4">Get updates</p>
+      <div class="sm:flex justify-between items-center">
+      
+
+      {% form 'customer' %}
+         {{ form.errors | default_errors }}
+         {% if form.posted_successfully? %} 
+          <p> {{ 'general.newsletter.success' | t }} </p>
+         
+         {% else %}
+          <div
+            class="relative ring-1 rounded-3xl max-w-full w-[335px] h-[58px] my-4"
+          >
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input
+              type="email"
+              name="contact[email]"
+              value="{% if customer.email != blank %} {{ customer.email }}  {% endif %} "
+              id="Email"
+              placeholder="Email Address"
+              autocorrect="off"
+              autocapitalize="off"
+              class="h-full w-full rounded-3xl placeholder:translate-x-[40px] placeholder:text-sm pl-2"
+            />
+            <img
+              src=" {{ 'letter-icon.png' | asset_url }} "
+              alt=""
+              class="w-[18px] h-[14px] absolute left-4 top-[41%]"
+            />
+
+            <button
+              type="submit" name="commit" id="Subscribe"
+              class="absolute right-1 w-28 h-5/6 translate-y-[10%] bg-[#003E52] rounded-3xl uppcase text-white text-center text-[13px]"
+            >
+              Sign up
+            </button>
+          </div>
+        {% endif %}
+        {% endform %}
+
+        <ul class="footer-links space-y-4 mt-8 sm:columns-2">
+
+          {% for link in linklists.footer.links %}
+            <li>
+              <a href="{{ link.url }}" class="text-base text-[#849BA6] font-normal">
+               {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+
+
+         
+          
+        </ul>
+      </div>
+      <div class="my-8 sm:flex justify-between">
+        <small class="text-sm text-[#849BA6] font-normal"
+          >Copyright © 2022 PAWADISE
+          <a href="mailto:phpjscoder@gmail.com">
+            <tt> by Ismail Otalb </tt>
+          </a>
+        </small>
+       
+        <img src="{{ 'payments-icons.png' | asset_url }}" alt="" class="mt-4" />
+      </div>
+    </div>
+  </footer>

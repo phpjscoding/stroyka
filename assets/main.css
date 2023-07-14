@@ -1,0 +1,39 @@
+.swiper-slide,
+.prev-swipper,
+.next-swipper {
+  user-select: none;
+}
+.fixed {
+  position: fixed;
+}
+.w-full {
+  width: 100%;
+}
+.top-0 {
+  top: 0;
+}
+.z-30 {
+  z-index: 30;
+}
+.bg-blue {
+  background-color: #392aba;
+}
+
+.bg-brown {
+  background-color: #82501e;
+}
+.bg-yellow {
+  background-color: #fcce5e;
+}
+.bg-pink {
+  background-color: #f472b6;
+}
+.bg-black {
+  background-color: #0009;
+}
+.bg-green {
+  background-color: green;
+}
+.bg-gray {
+  background-color: gray;
+}

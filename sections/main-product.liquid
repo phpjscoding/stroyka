@@ -1,0 +1,194 @@
+
+
+{%- liquid
+assign compare_at_price = product.compare_at_price | money
+assign price = product.price | default: 1999
+assign is_available = product.available | default: false
+assign price_in_money = price | money_with_currency
+assign product_form_id = 'product-form-' | append: section.id 
+assign is_variant_available = product.selected_or_first_available_variant.available 
+
+ assign current_variant = product.selected_or_first_available_variant 
+
+  assign media_count = product.media.size
+
+-%}
+
+
+
+<section class="product mt-12 relative overflow-hidden" >
+  <side 
+    x-transition
+    title="mini-cart" 
+    :class=" miniCartOpen ? 'translate-x-0' : 'translate-x-full' "
+    class="mini-cart fixed top-0 h-full sm:w-[400px] w-[200px] bg-gray-500 right-0 ring-1 translate-x-full">
+  cart-items
+  </side>
+        
+        <div class="container mx-auto sm:grid gap-12 grid-cols-2 items-center">
+          <div class="product-images sm:max-w-[471px] sm:-mt-4 ml-auto w-full">
+            <div
+              class="product_main-img rounded-lg h-[266px] sm:h-[374px] bg-[#E6ECEB] mx-auto grid place-items-center"
+            >
+              
+              <img src="{{ current_variant.featured_image | image_url }}" x-ref="main_product_image" />
+            </div>
+            <div title="product-images-thumbnails"
+              class="product_thumbs-bottom max-w-full grid auto-fit-50px mt-4 gap-2"
+            >
+              
+              {% for variant in product.variants %}
+                <a href="{{ variant.url }}" @click.prevent="handleVariantsImages($el)" data-id="{{ variant.id }}">
+                  <div 
+                    class="h-[50px] w-[50px] bg-[#E6ECEB] rounded shrink-0 p-1">
+              
+                    {{ variant.image | image_url: width: 200 | image_tag }}
+      
+      
+                      </div>
+                </a>
+                
+            {% endfor %}
+              
+
+             
+              
+            </div>
+            <div class="product_thumbs-left"></div>
+          </div>
+          <div class="product-info">
+            <p class="flex gap-4 items-center mt-8">
+              <span class="flex items-center py-4 self-start">
+                <img src= "{{'star.png' | asset_url}}" alt="icon" />
+                <img src= "{{'star.png' | asset_url}}" alt="icon" />
+                <img src= "{{'star.png' | asset_url}}" alt="icon" />
+                <img src= "{{'star.png' | asset_url}}" alt="icon" />
+                <img src= "{{'star.png' | asset_url}}" alt="icon" />
+
+              </span>
+              <span> (30) </span>
+            </p>
+            <h1 class="product-title heading text-3xl font-medium capitalize">
+                 {{ product.title | escape }} {{ media_count }}
+            </h1>
+            <ul class="mt-8 space-y-2">
+              <li class="flex gap-2">
+                <span> <img src="./public/Vectoricon.png" alt="" /> </span>
+                <p class="text-base heading">Secure Payments</p>
+              </li>
+              <li class="flex gap-2">
+                <span> <img src="./public/Vectoricon (1).png" alt="" /> </span>
+                <p class="text-base heading">Worldwide Shipping</p>
+              </li>
+              <li class="flex gap-2">
+                <span> <img src="./public/Vectoricon (2).png" alt="" /> </span>
+                <p class="text-base heading">In stock, ready to ship</p>
+              </li>
+            </ul>
+            <div
+            class="flex items-center gap-2 my-8
+             {% if is_available == false %}
+               price_sold-out
+             {% endif %}
+             {% if compare_at_price > price %}
+               price_on-sale
+             {% endif %} ">
+              <h2 class="product-price heading text-2xl font-medium">
+              {{price_in_money}}
+            </h2>
+              <h2
+                class="product-price_old text-gray-400 text-lg font-medium line-through"
+              >
+                 {{ compare_at_price }}
+              </h2>
+
+
+              
+            </div>
+           
+            
+           
+
+            {%- form 'product', product , id: 'product_form' -%}
+
+              {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+              <input type="hidden" name="id" value="{{ current_variant }}" id="selected_variant" >
+              
+              <div 
+                
+                title="product_variants" 
+                class="flex gap-2 is-js">
+                {%- for variant in product.variants -%}
+
+              <button 
+                
+                class="min-w-[106px] h-[45px] ring-1 ring-gray-300 flex items-center justify-around rounded"
+              >
+                <span class="w-5 h-5 rounded-full bg-{{ variant.title }}"></span>
+                <span> {{ variant.title }} </span>
+              </button>
+            {%- endfor -%}
+            </div>
+
+
+
+
+
+
+              <noscript>
+              <select name="id" class="no-js">
+
+                {%- for variant in product.variants -%}
+                  <option 
+                    {% if variant == current_variant %}    selected="selected"  {% endif %}
+                    value="{{ variant.id }}">
+                    {{ variant.title }}
+                  </option>
+                {%- endfor -%}
+              </select>
+            </noscript>
+
+            <div class="add-to-cart">
+              <button
+                @click.prevent="handleAddToCart()"
+               type="submit"
+               name="add"
+                class="w-[215px] h-[52px] rounded-3xl mt-12 mb-4 grid place-items-center bg-[#003E52] text-white uppercase"
+               
+              >
+             
+                  Add to cartt
+                 
+
+              </button>
+            </div>
+            {% if section.settings.show_dynamic_checkout %}
+              {{ form | payment_button }}
+            {% endif %}
+
+            {%- endform -%}
+
+
+            <div class="flex items-center gap-2 mb-12">
+              <span class="bg-[#BBEFEC] h-3 w-3 rounded-full block"></span>
+              <p>Shipping calculated at checkout</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+{% for product in collections.product %}
+{{ product.title | link_to: product.url }}  
+{% endfor %}
+      <script>
+
+        function selectVariant(event){
+           console.log(event.target)
+        }
+   
+
+
+        
+      </script>

@@ -1,0 +1,7 @@
+<h1> collections </h1>
+{% for collection in collections  %}
+<h2>  
+
+   {{ collection.title | link_to : collection.url }}
+</h2>
+{% endfor %}

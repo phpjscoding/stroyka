@@ -1,0 +1,109 @@
+<section class="index-swipper">
+    <div class="container mx-auto">
+      <h2 class="text-center capitalize text-3xl pt-14 pb-6">
+        pick your color
+      </h2>
+      <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'slide' %}
+
+                    {% comment %} -----slide------- {% endcomment %}
+                    <div
+                        class="swiper-slide h-[260px] w-[175px] sm:h-[374px] ring-1 rounded-2xl ring-gray-200 mt-px sm:flex flex-col items-center"
+                      >
+                       
+                        {{ block.settings.image | image_url: height: 167 | image_tag: class: 'sm:mt-12' }}
+                        <img src="{{ 'Ellipse 9.png' | asset_url }}" alt="shadow" class="sm:mt-auto" />
+                      </div>
+                    {% comment %} ------/slide------- {% endcomment %}
+
+            {% endcase %}
+          {% endfor %}
+          
+
+        </div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swipper-arrows flex my-8 justify-center relative">
+          <div
+            class="next-swipper h-8 w-8 rounded-full bg-gray-300 mr-8 hover:bg-slate-400"
+          >
+            <img
+              src="{{ 'chevron-r.png' | asset_url }}"
+              alt=""
+              class="absolute top-1/2 translate-x-full -translate-y-1/2 -scale-100"
+            />
+          </div>
+          <div
+            class="prev-swipper h-8 w-8 rounded-full bg-gray-300 relative hover:bg-slate-400"
+          >
+            <img
+              src="{{ 'chevron-r.png' | asset_url }}"
+              alt=""
+              class="absolute top-1/2 translate-x-full -translate-y-1/2"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% schema %}
+{
+  "name": "Slideshow",
+  "tag": "section",
+  "class": "slideshow",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Slideshow"
+    }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+     {
+       "name": "Slide",
+       "type": "slide",
+       "settings": [
+         {
+           "type": "image_picker",
+           "id": "image",
+           "label": "Image"
+         }
+       ]
+     }
+  ],
+  "presets": [
+    {
+      "name": "Slideshow",
+      "settings": {
+        "title": "Slideshow"
+      },
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ],
+  "locales": {
+    "en": {
+      "title": "Slideshow"
+    },
+    "fr": {
+      "title": "Diaporama"
+    }
+  },
+  "templates": ["article", "index", "page", "product"]
+}
+{% endschema %}
