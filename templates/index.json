@@ -1,1 +1,13 @@
-{"sections":{"header":{"type":"header","settings":{}},"abovefold":{"type":"abovefold","settings":{}},"slider-hero":{"type":"slider-hero","settings":{}},"features":{"type":"features","settings":{}},"benefits":{"type":"benefits","settings":{}},"install-guide":{"type":"install-guide","settings":{}},"best-sellers":{"type":"best-sellers","settings":{}},"benefits_2":{"type":"benefits_2","settings":{}},"how-install":{"type":"how-install","settings":{}},"reviews":{"type":"reviews","settings":{}},"garrentee":{"type":"garrentee","settings":{}},"main-footer":{"type":"main-footer","settings":{}}},"order":["header","abovefold","slider-hero","features","benefits","install-guide","best-sellers","benefits_2","how-install","reviews","garrentee","main-footer"]}
+{
+    "sections": {
+        
+        "main-footer": {
+            "type": "main-footer",
+            "settings": {}
+        }
+    },
+    "order": [
+       
+        "main-footer"
+    ]
+}
