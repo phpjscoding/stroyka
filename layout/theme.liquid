@@ -6,84 +6,89 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
-    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link
+      rel="preconnect"
+      href="https://cdn.shopify.com"
+      crossorigin>
 
     {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | img_url: '32x32' }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
-      <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      <link
+        rel="preconnect"
+        href="https://fonts.shopifycdn.com"
+        crossorigin>
     {%- endunless -%}
-      
+
+
+
     <title>{{ page_title }}</title>
 
     <style>
-      [x-cloak] { display: none !important; }
-
+      [x-cloak] {
+        display: none !important;
+      }
     </style>
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  
-   
-    {{ 'tw-output.css' | asset_url | stylesheet_tag }}
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+
+    {{ content_for_header }}
+    {{ 'style.css' | asset_url | stylesheet_tag }}
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+    {{ 'all.min.css' | asset_url | stylesheet_tag }}
     {{ 'main.css' | asset_url | stylesheet_tag }}
-   
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
-      rel="stylesheet"
-    />
-
-
-
-     
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-    
-
-    {{ content_for_header }}   
-
-
-    <script defer src="{{ 'main.js' | asset_url }}" ></script>
-
-    
-
-    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
-
-    <script src="https://cdn.tailwindcss.com" async ></script>
+    <script defer src="{{ 'jquery.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'number.js' | asset_url }}"></script>
+    <script defer src="{{ 'bootstrap.bundle.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'svg4everybody.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'owl.carousel.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'nouislider.min.js' | asset_url }}"></script>
+    <script defer src="{{ 'main.js' | asset_url }}"></script>
 
 
 
   </head>
 
   <body>
-    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
-      {% comment %} {{ "accessibility.skip_to_text" | t }} {% endcomment %}
+
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">{% comment %} {{ "accessibility.skip_to_text" | t }} {% endcomment %}
     </a>
 
 
 
-
-    
-    <div id="index-page" x-data="productFn()"  >
-      <div class="full-page">
-        
+    {% section 'header' %}
+    <div class="site">
+      <div class="side__body">
         {{ content_for_layout }}
       </div>
     </div>
-      
-    
+
+
 
     <script>
-     
-      
+
+
       window.routes = {
         cart_add_url: '{{ routes.cart_add_url }}',
         cart_change_url: '{{ routes.cart_change_url }}',
@@ -98,61 +103,60 @@
       window.variantStrings = {
         addToCart: `{{ 'products.product.add_to_cart' | t }}`,
         soldOut: `{{ 'products.product.sold_out' | t }}`,
-        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`
       }
     </script>
 
     <script type="module">
       import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
+      /* 
+                                    const swiper = new Swiper(".swiper", {
+                                      // Optional parameters
+                                      direction: "horizontal",
+                                      loop: true,
+                              
+                                      // If we need pagination
+                                      pagination: {
+                                        el: ".swiper-pagination",
+                                      },
+                              
+                                      // Navigation arrows
+                                      navigation: {
+                                        nextEl: ".next-swipper",
+                                        prevEl: ".prev-swipper",
+                                      },
+                              
+                                      // And if we need scrollbar
+                                      scrollbar: {
+                                        el: ".swiper-scrollbar",
+                                      },
+                                      centeredSlides: true,
+                              
+                                      slidesPerView: 1,
+                                      spaceBetween: 10,
+                                      // Responsive breakpoints
+                                      breakpoints: {
+                                        // when window width is >= 320px
+                                        320: {
+                                          slidesPerView: 2,
+                                          spaceBetween: 20,
+                                        },
+                                        // when window width is >= 480px
+                                        480: {
+                                          slidesPerView: 3,
+                                          spaceBetween: 30,
+                                        },
+                                        // when window width is >= 640px
+                                        640: {
+                                          slidesPerView: 4,
+                                          spaceBetween: 40,
+                                        },
+                                      },
+                                    });
+                              */
 
-      const swiper = new Swiper(".swiper", {
-        // Optional parameters
-        direction: "horizontal",
-        loop: true,
+    </script>
 
-        // If we need pagination
-        pagination: {
-          el: ".swiper-pagination",
-        },
-
-        // Navigation arrows
-        navigation: {
-          nextEl: ".next-swipper",
-          prevEl: ".prev-swipper",
-        },
-
-        // And if we need scrollbar
-        scrollbar: {
-          el: ".swiper-scrollbar",
-        },
-        centeredSlides: true,
-
-        slidesPerView: 1,
-        spaceBetween: 10,
-        // Responsive breakpoints
-        breakpoints: {
-          // when window width is >= 320px
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          // when window width is >= 480px
-          480: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          // when window width is >= 640px
-          640: {
-            slidesPerView: 4,
-            spaceBetween: 40,
-          },
-        },
-      });
-
-
-    </script>         
-
-  
 
 
   </body>
