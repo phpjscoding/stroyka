@@ -8,97 +8,57 @@
           <div class="owl-carousel owl-loaded owl-drag">
             <div class="owl-stage-outer">
               <div class="owl-stage" style="transform: translate3d(-3360px, 0px, 0px); transition: all 0.25s ease 0s; width: 5880px;">
-                <div class="owl-item cloned" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-{{ 'slide-2.jpg' | asset_url }} | asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-i{{ 'slide-2-mobile.jpg' | asset_url }} | asset_url }} )"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">Screwdrivers<br>Professional Tools</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
+
+                {% for block in section.blocks %}
+
+                  <div class="owl-item cloned" style="width: 840px;">
+                    <a class="block-slideshow__slide" href="#">
+                      <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ block.settings.slide_img | img_url: 'master' }})"></div>
+                      <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url({{ block.settings.slide_img_mob | img_url: 'medium' }})"></div>
+
+                      <div class="block-slideshow__slide-content">
+                        {% if block.settings.slide_heading != blank %}
+                          <div class="block-slideshow__slide-title">
+                            {{ block.settings.slide_heading }}
+                          </div>
+                        {% endif %}
+                        {% if block.settings.slide_text != blank %}
+                          <div class="block-slideshow__slide-text">
+                            {{ block.settings.slide_text }}
+                          </div>
+                        {% endif %}
+
+
+                        <div class="block-slideshow__slide-button">
+                          <span class="btn btn-primary btn-lg">Shop Now</span>
+                        </div>
                       </div>
+                    </a>
+                  </div>
+                {% endfor %}
+
+
+
+                {% comment %} set default slides when no blocks {% endcomment %}
+                {% if section.blocks.size == 0 %}
+                  {% for i in (1..5) %}
+                    <div class="owl-item cloned" style="width: 840px;">
+                      <a class="block-slideshow__slide" href="#">
+                        <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-{{ 'slide-2.jpg' | asset_url }} | asset_url }})"></div>
+                        <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-i{{ 'slide-2-mobile.jpg' | asset_url }} | asset_url }} )"></div>
+                        <div class="block-slideshow__slide-content">
+                          <div class="block-slideshow__slide-title">Screwdrivers<br>Professional Tools - {{ i }}</div>
+                          <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
+                          <div class="block-slideshow__slide-button">
+                            <span class="btn btn-primary btn-lg">Shop Now</span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                  </a>
-                </div>
-                <div class="owl-item cloned" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-3.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url( {{ 'slide-3-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">One more<br>Unique header</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="owl-item" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-1.jpg' |asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url({{ 'slide-1-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">Big choice of<br>Plumbing products</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="owl-item" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-2.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url({{ 'slide-2-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">Screwdrivers<br>Professional Tools</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="owl-item active" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-3.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url( {{ 'slide-3-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">One more<br>Unique header</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="owl-item cloned" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-1.jpg' |asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url({{ 'slide-1-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">Big choice of<br>Plumbing products</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="owl-item cloned" style="width: 840px;">
-                  <a class="block-slideshow__slide" href="#">
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop" style="background-image: url({{ 'slide-2.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile" style="background-image: url({{ 'slide-2-mobile.jpg' | asset_url }})"></div>
-                    <div class="block-slideshow__slide-content">
-                      <div class="block-slideshow__slide-title">Screwdrivers<br>Professional Tools</div>
-                      <div class="block-slideshow__slide-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Etiam pharetra laoreet dui quis molestie.</div>
-                      <div class="block-slideshow__slide-button">
-                        <span class="btn btn-primary btn-lg">Shop Now</span>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+                  {% endfor %}
+                {% endif %}
+
+
               </div>
             </div>
             <div class="owl-nav disabled">
@@ -115,16 +75,18 @@
                 <span aria-label="Next">›</span>
               </button>
             </div>
+
             <div class="owl-dots">
-              <button role="button" class="owl-dot">
-                <span></span>
-              </button>
-              <button role="button" class="owl-dot">
-                <span></span>
-              </button>
-              <button role="button" class="owl-dot active">
-                <span></span>
-              </button>
+              {% for i in (1..section.blocks.size) %}
+                {% if section.blocks.size > 1 %}
+                  <button role="button" class="owl-dot {% if forloop.first %}active{% endif %}">
+                    <span></span>
+                  </button>
+                {% endif %}
+
+              {% endfor %}
+
+
             </div>
           </div>
         </div>
@@ -164,7 +126,11 @@
           }, {
             "type": "image_picker",
             "id": "slide_img",
-            "label": "Slide image"
+            "label": "Slide image Desktop"
+          }, {
+            "type": "image_picker",
+            "id": "slide_img_mob",
+            "label": "Slide image Mobile"
           }
 
         ]
