@@ -33,16 +33,19 @@
                 <div class="nav-panel__row">
                     <div class="nav-panel__departments"><!-- .departments -->
                         <div class="departments departments--opened departments--fixed"
-                            data-departments-fixed-by=".block-slideshow">
+                            data-departments-fixed-by=".block-slideshow" style="z-index: 99;">
                             <div class="departments__body">
                                 <div class="departments__links-wrapper">
                                     <ul class="departments__links">
                                         {% for collection in collections %}
                                  
-                                        <li class="departments__item"><a href="{{ collection.url }}"> {{ collection.title  }} <svg
+                                        <li class="departments__item">
+                                            {{- collection.title | link_to: collection.url }}
+                                             <svg
                                                     class="departments__link-arrow" width="6px" height="9px">
                                                     <use xlink:href="images/sprite.svg#arrow-rounded-right-6x9"></use>
-                                                </svg></a>
+                                                </svg>
+
                                           
                                         </li>
                                         {% endfor %}

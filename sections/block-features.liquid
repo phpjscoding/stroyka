@@ -1,0 +1,67 @@
+<div class="block block-features block-features--layout--classic">
+  <div class="container">
+    <div class="block-features__list">
+      {% for block in section.blocks %}
+        <div class="block-features__item">
+          <div class="block-features__icon">
+            <svg width="48px" height="48px">
+              <use xlink:href="images/sprite.svg#fi-free-delivery-48"></use>
+            </svg>
+          </div>
+          <div class="block-features__content">
+            <div class="block-features__title">Free Shipping</div>
+            <div class="block-features__subtitle">For orders from $50</div>
+          </div>
+        </div>
+        <div class="block-features__divider"></div>
+      </div>
+    {% endfor %}
+
+    {% if section.blocks.size == 0 %}
+      {% for i in (1..4) %}
+        <div class="block-features__item">
+          <div class="block-features__icon">
+            <svg width="48px" height="48px">
+              <use xlink:href="images/sprite.svg#fi-free-delivery-48"></use>
+            </svg>
+          </div>
+          <div class="block-features__content">
+            <div class="block-features__title">Free Shipping</div>
+            <div class="block-features__subtitle">For orders from $50</div>
+          </div>
+        </div>
+      {% endfor %}
+
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Features a",
+    "blocks": [
+
+      {
+        "name": "Features b",
+        "type": "feature",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          }, {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Sub Title"
+          }, {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          }
+        ]
+      }
+
+
+    ]
+  }
+{% endschema %}
