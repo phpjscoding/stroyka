@@ -6,6 +6,9 @@
         "features":{
             "type":"block-features"
         },
+        "featured-products":{
+            "type":"featured-products"
+        },
         
         "main-footer": {
             "type": "main-footer",
@@ -15,6 +18,7 @@
     "order": [
        "hero-carousel",
        "features",
+       "featured-products",
         "main-footer"
     ]
 }
