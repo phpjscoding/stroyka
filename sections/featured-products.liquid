@@ -1,14 +1,14 @@
-<div class="block block-products-carousel" data-layout="grid-4">
+<div class="block block-products-carousel" data-layout="grid-4" id="comp-featuredP">
   <div class="container">
     <div class="block-header">
-      <h3 class="block-header__title">Featured Products</h3>
+      <h3 class="block-header__title"> [[message]] </h3>
       <div class="block-header__divider"></div>
       <ul class="block-header__groups-list">
         <li>
           <button type="button" class="block-header__group block-header__group--active">All</button>
         </li>
         {% for collection in collections %}
-        <li>
+        <li @click="fetchCollectionData('{{collection.handle}}')">
           <button type="button" class="block-header__group">
 
             {{ collection.title }}
@@ -36,23 +36,18 @@
       <div class="owl-carousel owl-loaded owl-drag">
         <div class="owl-stage-outer">
           <div class="owl-stage"
-            style="transform: translate3d(-6171px, 0px, 0px); transition: all 0s ease 0s; width: 8978px; padding-left: 1px; padding-right: 1px;">
-            {% for i in (1..8) %}
-            <div class="owl-item active" style="width: 266.5px; margin-right: 14px;">
+            style="transform: translate3d(-2244px, 0px, 0px); transition: all 0s ease 0s; width: 8978px; padding-left: 1px; padding-right: 1px;">
+            <div class="owl-item cloned" style="width: 266.5px; margin-right: 14px;" v-for="product in featuredProducts">
               <div class="block-products-carousel__column">
                 <div class="block-products-carousel__cell">
                   <div class="product-card"><button class="product-card__quickview" type="button"><svg width="16px"
                         height="16px">
                         <use xlink:href="images/sprite.svg#quickview-16"></use>
                       </svg> <span class="fake-svg-icon"></span></button>
-                    <div class="product-card__badges-list">
-                      <div class="product-card__badge product-card__badge--hot">Hot</div>
-                    </div>
-                    <div class="product-card__image"><a href="product.html"><img src="images/products/product-2.jpg"
+                    <div class="product-card__image"><a href="product.html"><img src="images/products/product-9.jpg"
                           alt=""></a></div>
                     <div class="product-card__info">
-                      <div class="product-card__name"><a href="product.html">Undefined Tool IRadix DPS3000SY 2700
-                          Watts</a></div>
+                      <div class="product-card__name"><a href="product.html">Spanner Wrench</a></div>
                       <div class="product-card__rating">
                         <div class="rating">
                           <div class="rating__body"><svg class="rating__star rating__star--active" width="13px"
@@ -116,7 +111,7 @@
                               <div class="rating__stroke">
                                 <div class="fake-svg-icon"></div>
                               </div>
-                            </div><svg class="rating__star rating__star--active" width="13px" height="12px">
+                            </div><svg class="rating__star" width="13px" height="12px">
                               <g class="rating__fill">
                                 <use xlink:href="images/sprite.svg#star-normal"></use>
                               </g>
@@ -124,7 +119,7 @@
                                 <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
                               </g>
                             </svg>
-                            <div class="rating__star rating__star--only-edge rating__star--active">
+                            <div class="rating__star rating__star--only-edge">
                               <div class="rating__fill">
                                 <div class="fake-svg-icon"></div>
                               </div>
@@ -134,7 +129,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="product-card__rating-legend">11 Reviews</div>
+                        <div class="product-card__rating-legend">9 Reviews</div>
                       </div>
                       <ul class="product-card__features-list">
                         <li>Speed: 750 RPM</li>
@@ -147,7 +142,7 @@
                     <div class="product-card__actions">
                       <div class="product-card__availability">Availability: <span class="text-success">In Stock</span>
                       </div>
-                      <div class="product-card__prices">$1,019.00</div>
+                      <div class="product-card__prices">$19.00</div>
                       <div class="product-card__buttons"><button class="btn btn-primary product-card__addtocart"
                           type="button">Add To Cart</button> <button
                           class="btn btn-secondary product-card__addtocart product-card__addtocart--list"
@@ -165,30 +160,71 @@
                 </div>
               </div>
             </div>
-            {% endfor %}
+
           </div>
-
-
-
-
-
-
-
-
-
         </div>
+        <div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span
+              aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span
+              aria-label="Next">›</span></button></div>
+        <div class="owl-dots disabled"></div>
       </div>
-      <div class="owl-nav disabled" hidden>
-        <button type="button" role="presentation" class="owl-prev">
-          <span aria-label="Previous">‹</span>
-        </button>
-        <button type="button" role="presentation" class="owl-next">
-          <span aria-label="Next">›</span>
-        </button>
-      </div>
-      <div class="owl-dots disabled"></div>
     </div>
+
+
+
   </div>
 </div>
 
 </div>
+
+<script>
+  if (document.querySelector('#comp-featuredP')) {
+    let featuredP = Vue.createApp({
+      delimiters: ['[[', ']]'],
+      data() {
+        return {
+
+          message: 'Hello Vue!',
+          featuredProducts: [],
+          people: ['nae', 'aofeu', 'owefnt']
+        }
+
+      },
+      created() {
+        // Call the fetchCollectionData method once the component is created
+        console.log(this.featuredProducts);
+        this.fetchCollectionData('tools-kits');
+      },
+      methods: {
+        async fetchCollectionData(handle) {
+          const url = `https://stroyka-l.myshopify.com/collections/${handle}?view=jsondata`;
+          try {
+
+            let res = await fetch(url);
+            let data = await res.json();
+            //console.log(data)
+            this.featuredProducts = data
+
+          } catch (err) {
+
+            console.log(err)
+          }
+
+
+          console.log(url)
+
+        }
+      }
+    })
+
+    featuredP.mount("#comp-featuredP")
+
+
+  }
+
+
+
+
+
+
+</script>

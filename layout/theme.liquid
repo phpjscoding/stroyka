@@ -57,6 +57,7 @@
     {{ content_for_header }}
 
 
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     {{ 'style.css' | asset_url | stylesheet_tag }}
     {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
     {{ 'all.min.css' | asset_url | stylesheet_tag }}
@@ -69,8 +70,7 @@
     <script defer src="{{ 'nouislider.min.js' | asset_url }}"></script>
     <script defer src="{{ 'main.js' | asset_url }}"></script>
 
-
-
+    <script src="{{'VueApp.js' | asset_url }}"></script>
   </head>
 
   <body>
@@ -81,7 +81,7 @@
 
 
     {% section 'header' %}
-    <div class="site">
+    <div class="site" data-vueapp>
       <div class="side__body">
         {{ content_for_layout }}
       </div>
@@ -113,50 +113,50 @@
     <script type="module">
       import Swiper from "https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.esm.browser.min.js";
       /* 
-                                                const swiper = new Swiper(".swiper", {
-                                                  // Optional parameters
-                                                  direction: "horizontal",
-                                                  loop: true,
-                                          
-                                                  // If we need pagination
-                                                  pagination: {
-                                                    el: ".swiper-pagination",
-                                                  },
-                                          
-                                                  // Navigation arrows
-                                                  navigation: {
-                                                    nextEl: ".next-swipper",
-                                                    prevEl: ".prev-swipper",
-                                                  },
-                                          
-                                                  // And if we need scrollbar
-                                                  scrollbar: {
-                                                    el: ".swiper-scrollbar",
-                                                  },
-                                                  centeredSlides: true,
-                                          
-                                                  slidesPerView: 1,
-                                                  spaceBetween: 10,
-                                                  // Responsive breakpoints
-                                                  breakpoints: {
-                                                    // when window width is >= 320px
-                                                    320: {
-                                                      slidesPerView: 2,
-                                                      spaceBetween: 20,
-                                                    },
-                                                    // when window width is >= 480px
-                                                    480: {
-                                                      slidesPerView: 3,
-                                                      spaceBetween: 30,
-                                                    },
-                                                    // when window width is >= 640px
-                                                    640: {
-                                                      slidesPerView: 4,
-                                                      spaceBetween: 40,
-                                                    },
-                                                  },
-                                                });
-                                          */
+                                                                                                      const swiper = new Swiper(".swiper", {
+                                                                                                        // Optional parameters
+                                                                                                        direction: "horizontal",
+                                                                                                        loop: true,
+                                                                                                
+                                                                                                        // If we need pagination
+                                                                                                        pagination: {
+                                                                                                          el: ".swiper-pagination",
+                                                                                                        },
+                                                                                                
+                                                                                                        // Navigation arrows
+                                                                                                        navigation: {
+                                                                                                          nextEl: ".next-swipper",
+                                                                                                          prevEl: ".prev-swipper",
+                                                                                                        },
+                                                                                                
+                                                                                                        // And if we need scrollbar
+                                                                                                        scrollbar: {
+                                                                                                          el: ".swiper-scrollbar",
+                                                                                                        },
+                                                                                                        centeredSlides: true,
+                                                                                                
+                                                                                                        slidesPerView: 1,
+                                                                                                        spaceBetween: 10,
+                                                                                                        // Responsive breakpoints
+                                                                                                        breakpoints: {
+                                                                                                          // when window width is >= 320px
+                                                                                                          320: {
+                                                                                                            slidesPerView: 2,
+                                                                                                            spaceBetween: 20,
+                                                                                                          },
+                                                                                                          // when window width is >= 480px
+                                                                                                          480: {
+                                                                                                            slidesPerView: 3,
+                                                                                                            spaceBetween: 30,
+                                                                                                          },
+                                                                                                          // when window width is >= 640px
+                                                                                                          640: {
+                                                                                                            slidesPerView: 4,
+                                                                                                            spaceBetween: 40,
+                                                                                                          },
+                                                                                                        },
+                                                                                                      });
+                                                                                                */
 
     </script>
 
