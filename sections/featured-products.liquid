@@ -12,8 +12,8 @@
           <button type="button" class="block-header__group block-header__group--active">All</button>
         </li>
         {% for collection in collections %}
-        <li @click="fetchCollectionData('{{collection.handle}}')">
-          <button type="button" class="block-header__group">
+        <li>
+          <button type="button" class="block-header__group" @click="fetchCollectionData('{{collection.handle}}')">
 
             {{ collection.title }}
           </button>
@@ -37,128 +37,54 @@
     </div>
 
     <div class="carousel xxx" v-if="featuredProducts">
+      {% comment %}
+      <div class="swiper-spin" :class="{loading:isLoading===true}">
+        {% render 'loading-skeleton.liquid' %}
+      </div> {% endcomment %}
       <!-- Slider main container -->
       <div class="swiper">
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" style="min-height: 300px;">
           <div class="swiper-slide" v-for="c_product in featuredProducts">
             <div class="">
               <div class="block-products-carousel__column">
+                <div class="movie--isloading" :class="isLoadingFn">
+                  <div class="loading-image"></div>
+                  <div class="loading-content">
+                    <div class="loading-text-container">
+                      <div class="loading-main-text"></div>
+                      <div class="loading-sub-text"></div>
+                    </div>
+                    <div class="loading-btn"></div>
+                  </div>
+                </div>
                 <div class="block-products-carousel__cell">
                   <div class="product-card"><button class="product-card__quickview" type="button"><svg width="16px"
                         height="16px">
                         <use xlink:href="images/sprite.svg#quickview-16"></use>
                       </svg> <span class="fake-svg-icon"></span></button>
-                    <div class="product-card__image"><a href="product.html"><img :src="[[ c_product.image ]]"
-                          alt="" loading="lazy"></a></div>
+                    <div class="product-card__image"><a href="product.html"><img :src="[[ c_product.image ]]" alt=""
+                          loading="lazy"></a></div>
                     <div class="product-card__info">
                       <div class="product-card__name"><a href="product.html"> [[c_product.title]] </a></div>
-                      <div class="product-card__rating">
-                        <div class="rating">
-                          <div class="rating__body"><svg class="rating__star rating__star--active" width="13px"
-                              height="12px">
-                              <g class="rating__fill">
-                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                              </g>
-                              <g class="rating__stroke">
-                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                              </g>
-                            </svg>
-                            <div class="rating__star rating__star--only-edge rating__star--active">
-                              <div class="rating__fill">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                              <div class="rating__stroke">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                            </div><svg class="rating__star rating__star--active" width="13px" height="12px">
-                              <g class="rating__fill">
-                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                              </g>
-                              <g class="rating__stroke">
-                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                              </g>
-                            </svg>
-                            <div class="rating__star rating__star--only-edge rating__star--active">
-                              <div class="rating__fill">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                              <div class="rating__stroke">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                            </div><svg class="rating__star rating__star--active" width="13px" height="12px">
-                              <g class="rating__fill">
-                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                              </g>
-                              <g class="rating__stroke">
-                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                              </g>
-                            </svg>
-                            <div class="rating__star rating__star--only-edge rating__star--active">
-                              <div class="rating__fill">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                              <div class="rating__stroke">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                            </div><svg class="rating__star" width="13px" height="12px">
-                              <g class="rating__fill">
-                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                              </g>
-                              <g class="rating__stroke">
-                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                              </g>
-                            </svg>
-                            <div class="rating__star rating__star--only-edge">
-                              <div class="rating__fill">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                              <div class="rating__stroke">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                            </div><svg class="rating__star" width="13px" height="12px">
-                              <g class="rating__fill">
-                                <use xlink:href="images/sprite.svg#star-normal"></use>
-                              </g>
-                              <g class="rating__stroke">
-                                <use xlink:href="images/sprite.svg#star-normal-stroke"></use>
-                              </g>
-                            </svg>
-                            <div class="rating__star rating__star--only-edge">
-                              <div class="rating__fill">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                              <div class="rating__stroke">
-                                <div class="fake-svg-icon"></div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="product-card__rating-legend">7 Reviews</div>
-                      </div>
-                      <ul class="product-card__features-list">
-                        <li>Speed: 750 RPM</li>
-                        <li>Power Source: Cordless-Electric</li>
-                        <li>Battery Cell Type: Lithium</li>
-                        <li>Voltage: 20 Volts</li>
-                        <li>Battery Capacity: 2 Ah</li>
-                      </ul>
+
+
                     </div>
                     <div class="product-card__actions">
                       <div class="product-card__availability">Availability: <span class="text-success">In Stock</span>
                       </div>
-                      <div class="product-card__prices">$1,800.00</div>
-                      <div class="product-card__buttons"><button class="btn btn-primary product-card__addtocart"
-                          type="button">Add To Cart</button> <button
-                          class="btn btn-secondary product-card__addtocart product-card__addtocart--list"
-                          type="button">Add To Cart</button> <button
-                          class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
-                          type="button"><svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#wishlist-16"></use>
-                          </svg> <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span></button> <button
-                          class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
-                          type="button"><svg width="16px" height="16px">
-                            <use xlink:href="images/sprite.svg#compare-16"></use>
-                          </svg> <span class="fake-svg-icon fake-svg-icon--compare-16"></span></button></div>
+                      <div class="product-card__prices"> [[c_product.price]] </div>
+
+                      <form action="/cart/add" method="post" enctype="multipart/form-data"
+                        :id="'form-'+[[c_product.firstId]]">
+                        <input type="hidden" name="id" :value="c_product.firstId">
+                      </form>
+
+                      <div class="product-card__buttons">
+
+                        <button @click.prevent="addToCart(c_product.firstId)"
+                          class="btn btn-primary product-card__addtocart" type="submit" value="add to cart"
+                          :form="'form-' + c_product.firstId"> add to cart </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -175,34 +101,29 @@
 
 </div>
 
+{% render "block-banner"   %}
+
 <script>
   if (document.querySelector('#comp-featuredP')) {
     let featuredP = Vue.createApp({
       delimiters: ['[[', ']]'],
       data() {
         return {
-
-          message: 'Hello Vue!',
           featuredProducts: [],
-          people: ['nae', 'aofeu', 'owefnt']
+          isLoading: true
         }
 
       },
-      created() {
-        // Call the fetchCollectionData method once the component is created
 
-      },
       mounted() {
 
         this.fetchCollectionData('tools-kits');
       },
-      watch: {
-        featuredProducts: {
-          immediate: true, // Run the handler immediately on component creation
-          handler(newVal) {
-            if (newVal) {
-              console.log(this.featuredProducts, 'featured products');
-            }
+      computed: {
+        isLoadingFn() {
+          return {
+            'spining': this.isLoading,
+            'complete': !this.isLoading
           }
         }
       },
@@ -210,13 +131,38 @@
         fetchCollectionData(handle) {
           const url = `https://stroyka-l.myshopify.com/collections/${handle}?view=jsondata`;
           fetch(url).then(res => res.json()).then(data => {
-            this.featuredProducts = data;
-            console.log('faosetn', this.featuredProducts)
+            setTimeout(() => {
+              this.featuredProducts = data;
+              this.isLoading = false;
+              console.log('faosetn', this.featuredProducts);
+            }, 900);
           })
 
 
 
-        }
+        },
+        addToCart(_id) {
+          console.info('product id ', _id)
+          var url = '/cart/add.js';
+          var data = {
+            quantity: 1,
+            id: _id
+          };
+
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          }).then((res)=>{
+            if(res.ok){
+               document.querySelector(".indicator.indicator--trigger--click").classList.add("indicator--opened")
+            }
+          }).catch(err=> console.log('error in fetching',err))
+
+        },
+       
       }
     })
 

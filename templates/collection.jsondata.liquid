@@ -8,7 +8,10 @@
   "title":{{ product.title | json }},
   "url":{{ product.url | json }},
   "image":{{ product.featured_media | img_url: 'master' | json }},
-  "tags":{{ product.tags | json }}
+  "tags":{{ product.tags | json }},
+  "price":{{ product.price | money | json }},
+  "id":{{ product.id | json }},
+  "firstId":{{ product.first_available_variant.id }}
   }{% unless forloop.last %}
     ,{% endunless %}
 {%- endfor -%}
